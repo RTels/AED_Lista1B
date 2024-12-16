@@ -1,0 +1,97 @@
+<html>
+<head>
+<title>main.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #d55fde; font-style: italic;}
+.s1 { color: #bbbbbb;}
+.s2 { color: #89ca78;}
+.s3 { color: #5c6370; font-style: italic;}
+.s4 { color: #d19a66;}
+</style>
+</head>
+<body bgcolor="#282c34">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+main.cpp</font>
+</center></td></tr></table>
+<pre><span class="s0">#include </span><span class="s2">&lt;iostream&gt;</span>
+
+<span class="s0">using namespace </span><span class="s1">std;</span>
+
+<span class="s3">// Function prototypes</span>
+<span class="s0">int </span><span class="s1">part(</span><span class="s0">int </span><span class="s1">arr[], </span><span class="s0">int </span><span class="s1">left, </span><span class="s0">int </span><span class="s1">right);</span>
+<span class="s0">void </span><span class="s1">quicksort(</span><span class="s0">int </span><span class="s1">arr[], </span><span class="s0">int </span><span class="s1">left, </span><span class="s0">int </span><span class="s1">right);</span>
+<span class="s0">int </span><span class="s1">differencek(</span><span class="s0">int </span><span class="s1">nums[], </span><span class="s0">int </span><span class="s1">n, </span><span class="s0">int </span><span class="s1">k);</span>
+
+<span class="s0">int </span><span class="s1">main() {</span>
+    <span class="s3">// Input reading</span>
+    <span class="s0">int </span><span class="s1">n, k;</span>
+    <span class="s1">cin &gt;&gt; n &gt;&gt; k;</span>
+
+    <span class="s0">int </span><span class="s1">nums[n];</span>
+    <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s1">; i &lt; n; i++) {</span>
+        <span class="s1">cin &gt;&gt; nums[i];</span>
+    <span class="s1">}</span>
+
+    <span class="s3">// Output the result</span>
+    <span class="s1">cout &lt;&lt; differencek(nums, n, k) &lt;&lt; endl;</span>
+    <span class="s0">return </span><span class="s4">0</span><span class="s1">;</span>
+<span class="s1">}</span>
+
+<span class="s3">// Partition function</span>
+<span class="s0">int </span><span class="s1">part(</span><span class="s0">int </span><span class="s1">arr[], </span><span class="s0">int </span><span class="s1">left, </span><span class="s0">int </span><span class="s1">right) {</span>
+    <span class="s0">int </span><span class="s1">i = left - </span><span class="s4">1</span><span class="s1">;</span>
+    <span class="s0">int </span><span class="s1">pivot = arr[right];</span>
+
+    <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">j = left; j &lt; right; ++j) {</span>
+        <span class="s0">if </span><span class="s1">(arr[j] &lt; pivot) {</span>
+            <span class="s1">i++;</span>
+            <span class="s0">int </span><span class="s1">temp = arr[i];</span>
+            <span class="s1">arr[i] = arr[j];</span>
+            <span class="s1">arr[j] = temp;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s0">int </span><span class="s1">temp = arr[i + </span><span class="s4">1</span><span class="s1">];</span>
+    <span class="s1">arr[i + </span><span class="s4">1</span><span class="s1">] = arr[right];</span>
+    <span class="s1">arr[right] = temp;</span>
+
+    <span class="s0">return </span><span class="s1">i + </span><span class="s4">1</span><span class="s1">;</span>
+<span class="s1">}</span>
+
+<span class="s0">void </span><span class="s1">quicksort(</span><span class="s0">int </span><span class="s1">arr[], </span><span class="s0">int </span><span class="s1">left, </span><span class="s0">int </span><span class="s1">right) {</span>
+    <span class="s0">if </span><span class="s1">(left &lt; right) {</span>
+        <span class="s0">int </span><span class="s1">pivot_index = part(arr, left, right);</span>
+        <span class="s1">quicksort(arr, left, pivot_index - </span><span class="s4">1</span><span class="s1">);</span>
+        <span class="s1">quicksort(arr, pivot_index + </span><span class="s4">1</span><span class="s1">, right);</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s0">int </span><span class="s1">differencek(</span><span class="s0">int </span><span class="s1">nums[], </span><span class="s0">int </span><span class="s1">n, </span><span class="s0">int </span><span class="s1">k) {</span>
+    
+    <span class="s1">quicksort(nums, </span><span class="s4">0</span><span class="s1">, n - </span><span class="s4">1</span><span class="s1">); </span><span class="s3">//ordena</span>
+
+    <span class="s0">int </span><span class="s1">count = </span><span class="s4">0</span><span class="s1">;</span>
+    <span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s1">, j = </span><span class="s4">1</span><span class="s1">;</span>
+
+   
+    <span class="s0">while </span><span class="s1">(j &lt; n) {         </span><span class="s3">//dois ponteiros</span>
+        <span class="s0">int </span><span class="s1">diff = nums[j] - nums[i];</span>
+
+        <span class="s0">if </span><span class="s1">(diff == k) {</span>
+            <span class="s1">count++;</span>
+            <span class="s1">i++;</span>
+            <span class="s1">j++;</span>
+        <span class="s1">} </span><span class="s0">else if </span><span class="s1">(diff &lt; k) {</span>
+            <span class="s1">j++;</span>
+        <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">i++;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">return </span><span class="s1">count;</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>
